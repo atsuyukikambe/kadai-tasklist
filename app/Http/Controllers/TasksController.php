@@ -73,16 +73,18 @@ class TasksController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
+    {   
+
         // idの値でユーザを検索して取得
         $task = Task::findOrFail($id);
 
         // ユーザ詳細ビューでそれらを表示
         if (\Auth::id() === $task->user_id) {
-        return view('tasks.show', [
-            'task' => $task,
-        ]);
+            return view('tasks.show', [
+                'task' => $task,
+            ]);
         }
+        return redirect('/');
     }
 
     /**
